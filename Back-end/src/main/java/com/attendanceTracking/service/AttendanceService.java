@@ -26,4 +26,6 @@ public class AttendanceService {
 		  repo.save(AttendanceModel);
 
 	    }
+	public void updateAttendance(Integer id, AttendanceModel AttendanceModel) {
+		repo.save(AttendanceModel);
 }
