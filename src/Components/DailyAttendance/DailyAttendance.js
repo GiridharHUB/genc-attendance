@@ -10,14 +10,31 @@ import { Select } from 'antd';
 import AttendanceForm from '../Form/AttendanceForm';
 
 function DailyAttendance() {
-    const [value, setValue] = useState(1);
+    const [data, setData] = useState([]);
     const onChange = (e) => {
         console.log('radio checked', e.target.value);
-        setValue(e.target.value);
+        setData({"daily_attendance":e.target.value});
     };
     const handleChange = (value) => {
         console.log(`selected ${value}`);
     };
+    useEffect(()=>{
+        const id = sessionStorage.getItem("associateId")  
+        axios
+        .get("http://localhost:8080/attendance/"+id)
+        .then(data => setData(data.data))
+        .catch(error => console.log(error));
+    },[])
+
+    const submit = () => {
+        axios
+        .put("http://localhost:8080/attendance/"+SAVE+"/"+id), {
+            data
+          }
+        .then(data => console.log("saved"))
+        .catch(error => console.log(error));
+        console.log(data)
+    }
     return (
         <Form
             labelCol={{
@@ -77,7 +94,7 @@ function DailyAttendance() {
                     </div>
                     </Form.Item>
                 </div>
-                <Button style={{ background: "#000048", color: "#fff", width: "15%" }}>Submit</Button>
+                <Button style={{ background: "#000048", color: "#fff", width: "15%" }} onClick={submit}>Submit</Button>
                 <Button style={{ width: "15%", marginLeft: "2vh" }}>Reset</Button>
 
             </div>

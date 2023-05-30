@@ -14,7 +14,6 @@ function AttendanceForm() {
         .get("http://localhost:8080/attendance/"+id)
         .then(data => setData(data.data))
         .catch(error => console.log(error));
-        
     },[])
     console.log(data)
     return (
