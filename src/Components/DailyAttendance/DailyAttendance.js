@@ -4,36 +4,35 @@ import {
     Form,
     Radio,
 } from 'antd';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import "../DailyAttendance/DailyAttendance.css"
 import { Select } from 'antd';
 import AttendanceForm from '../Form/AttendanceForm';
+import axios from 'axios'
 
 function DailyAttendance() {
     const [data, setData] = useState([]);
+    const id = sessionStorage.getItem("associateId")
+    let attendance = [];
     const onChange = (e) => {
         console.log('radio checked', e.target.value);
-        setData({"daily_attendance":e.target.value});
+        attendance.push(e.target.value)
     };
     const handleChange = (value) => {
         console.log(`selected ${value}`);
     };
     useEffect(()=>{
-        const id = sessionStorage.getItem("associateId")  
         axios
         .get("http://localhost:8080/attendance/"+id)
-        .then(data => setData(data.data))
+        .then((value) => setData(value))
         .catch(error => console.log(error));
     },[])
 
     const submit = () => {
-        axios
-        .put("http://localhost:8080/attendance/"+SAVE+"/"+id), {
-            data
-          }
+        axios.put(("http://localhost:8080/attendance/SAVE/"+id), {data})
         .then(data => console.log("saved"))
         .catch(error => console.log(error));
-        console.log(data)
+        console.log(attendance)
     }
     return (
         <Form
@@ -58,7 +57,7 @@ function DailyAttendance() {
                 <div className='attendance'>
                 <Form.Item label="RTO Mode:" className='formitem'>
                     <div className='fields'>
-                    <Radio.Group onChange={onChange} value={value}>
+                    <Radio.Group onChange={onChange}>
                         <Radio value={"Working From Home"}>WFH</Radio>
                         <Radio value={"Working From Office"}>Office</Radio>
                     </Radio.Group>
