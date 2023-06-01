@@ -18,27 +18,27 @@ public class AttendanceService {
 
 
 	
-	  public Optional<AttendanceModel> showAll(int id) { 
+	  public Optional<Attendance> showAll(int id) { 
 		  return repo.findById(id); 
 		  }
 	 
-	  public void addAttendance(AttendanceModel AttendanceModel) {
+	  public void addAttendance(Attendance AttendanceModel) {
 		  repo.save(AttendanceModel);
 
 	    }
-	public void updateAttendance(Integer id, AttendanceModel AttendanceModel) {
+	public void updateAttendance(Integer id, Attendance AttendanceModel) {
 		repo.save(AttendanceModel);
 }
-	public List<AttendanceModel> getAllAttendance(){
+	public List<Attendance> getAllAttendance(){
 	return repo.findAll();
 }
-	public void addAttendance(AttendanceModel AttendanceModel) {
+	public void addAttendance(Attendance AttendanceModel) {
 		
 		repo.save(AttendanceModel);
 		
 	}
-	public void updateAttendance(Integer id, AttendanceModel AttendanceModel) {
-		AttendanceModel existingupdateAttendanceModel = repo.findById(id).orElse(null);
+	public void updateAttendance(Integer id, Attendance AttendanceModel) {
+		Attendance existingupdateAttendance = repo.findById(id).orElse(null);
 		/*existingupdateAttendance.setDaily_Attendance(existingupdateAttendance.getDaily_Attendance());
 		existingupdateAttendance.setMonthly_RTO_Dates(existingupdateAttendance.getMonthly_RTO_Dates());
 		*/// TODO Auto-generated method stub
