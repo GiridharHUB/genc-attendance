@@ -46,7 +46,7 @@ function Login() {
           ]}
         >
           <Input
-          type='number'
+          type='text'
             prefix={<UserOutlined className="site-form-item-icon" />}
             placeholder="Associate Id" />
         </Form.Item>

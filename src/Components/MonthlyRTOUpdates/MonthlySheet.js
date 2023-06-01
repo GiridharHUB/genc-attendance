@@ -5,7 +5,8 @@ import {
     Form,
 } from 'antd';
 import AttendanceForm from '../Form/AttendanceForm';
-import "../MonthlyRTOUpdates/MonthlySheet.css"
+import "../MonthlyRTOUpdates/MonthlySheet.css";
+import Toolbar from "react-multi-date-picker/plugins/toolbar"
 
 function MonthlySheet() {
     const [value, setValue] = useState(new Date());
@@ -36,7 +37,11 @@ function MonthlySheet() {
             placeholder='click to open' 
             onChange={setValue} 
             arrow={true} 
-            style={{width: "100vh"}}/>
+            style={{width: "100vh"}}
+            plugins={[
+                <Toolbar position="bottom" 
+                sort={["deselect", "close"]}/>
+              ]}/>
         </div>
 
             <Button style={{background: "#000048", color: "#fff", width:"15%"}}>Submit</Button>

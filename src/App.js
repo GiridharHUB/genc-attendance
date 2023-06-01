@@ -10,6 +10,7 @@ import Home from './Components/Home/Home';
 import Login from './Components/Login/Login';
 import DailyAttendance from './Components/DailyAttendance/DailyAttendance';
 import MonthlySheet from './Components/MonthlyRTOUpdates/MonthlySheet';
+import Admin from './Components/Admin/Admin';
 
 function App() {
   return (
@@ -43,7 +44,7 @@ function App() {
               <Routes>
                 <Route exact path='/DailyAttendance' element={<DailyAttendance />}></Route>
                 <Route exact path='/RTOUpdates' element={<MonthlySheet />}></Route>
-
+                <Route exact path='/admin' element={<Admin />}></Route>
               </Routes>
             </div>
           </div>
