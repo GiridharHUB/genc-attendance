@@ -26,21 +26,21 @@ public class AttendanceController {
 	private AttendanceService service;
 	
 	@GetMapping("/{id}")
-	public Optional<AttendanceModel> getById(@PathVariable("id") Integer id){
+	public Optional<Attendance> getById(@PathVariable("id") Integer id){
 		return service.showAll(id);
 	}
 	
 // 	@PostMapping("/CREATE")
-// 	public void addAttendance (@RequestBody AttendanceModel AttendanceModel ) {
+// 	public void addAttendance (@RequestBody Attendance AttendanceModel ) {
 // 		service.addAttendance(AttendanceModel);
 // 	}
 // 	@PutMapping("/SAVE/{id}")
-// 	public void updateAttendance(@PathVariable Integer id, @RequestBody AttendanceModel AttendanceModel ) {
+// 	public void updateAttendance(@PathVariable Integer id, @RequestBody Attendance AttendanceModel ) {
 // 		service.updateAttendance(id, AttendanceModel);
 // 	}
 	
 	@PutMapping("/SAVE/{id}")
-	public void updateAttendance(@PathVariable Integer id, @RequestBody AttendanceModel AttendanceModel ) {
+	public void updateAttendance(@PathVariable Integer id, @RequestBody Attendance AttendanceModel ) {
 		service.updateAttendance(id, AttendanceModel);
 
 }
