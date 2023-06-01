@@ -39,5 +39,10 @@ public class AttendanceController {
 // 		service.updateAttendance(id, AttendanceModel);
 // 	}
 	
+	@PutMapping("/SAVE/{id}")
+	public void updateAttendance(@PathVariable Integer id, @RequestBody AttendanceModel AttendanceModel ) {
+		service.updateAttendance(id, AttendanceModel);
+
+}
 	
 }
