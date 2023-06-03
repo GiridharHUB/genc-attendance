@@ -1,0 +1,12 @@
+.addinputs{
+    border: grey 1px solid;
+    border-radius: 1vh;
+    padding: 1vh;
+    margin-top: 2vh;
+}
+
+.addForm{
+    display: flex;
+    flex-direction: column;
+    gap: 3vh;
+}

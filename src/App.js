@@ -1,5 +1,5 @@
 import './App.css';
-
+// import { Button } from "antd"
 import {
   BrowserRouter as Router,
   Routes,
@@ -11,17 +11,17 @@ import Login from './Components/Login/Login';
 import DailyAttendance from './Components/DailyAttendance/DailyAttendance';
 import MonthlySheet from './Components/MonthlyRTOUpdates/MonthlySheet';
 import Admin from './Components/Admin/Admin';
+import Report from './Components/Report/Report';
 
 function App() {
   return (
     <div className="App">
       <div className='navBar'>
-        <span style={{ visibility: "hidden" }}>Genc Attendance</span>
-        <span>Genc Attendance</span>
+
         {sessionStorage.getItem("isLoggedin") ? (
 
           <div className='details'>
-            <span>welcome {sessionStorage.getItem("associateName")}</span><br />
+            <span>Welcome {sessionStorage.getItem("associateName")}</span><br />
             <span>Id: {sessionStorage.getItem("associateId")}</span>
 
           </div>
@@ -33,20 +33,30 @@ function App() {
 
             </div>
           )}
+          
+        <span>Genc Attendance</span>
+        {sessionStorage.getItem("isLoggedin") ? (
+
+        <button className='logoutbtn' style={{height: "50%",marginTop: "3vh", width: "10%"}}>Logout</button>
+        ):
+        (
+          <div>
+          <span style={{ visibility: "hidden" }}>Genc Attendance</span>
+
+        </div>
+        )}
       </div>
       <Router>
         {sessionStorage.getItem("isLoggedin") ? (
           <div className='authoriseduser'>
-
-            <Home />
-            <div className='formbody'>
-              {/* <AttendanceForm /> */}
               <Routes>
+              <Route exact path='/' element={<Home />}></Route>
                 <Route exact path='/DailyAttendance' element={<DailyAttendance />}></Route>
                 <Route exact path='/RTOUpdates' element={<MonthlySheet />}></Route>
                 <Route exact path='/admin' element={<Admin />}></Route>
+                <Route exact path='/report' element={<Report />}></Route>
+
               </Routes>
-            </div>
           </div>
         )
           :

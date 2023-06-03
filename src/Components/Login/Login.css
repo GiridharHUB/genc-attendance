@@ -1,0 +1,8 @@
+.login{
+    display: flex;
+    justify-content: space-around;
+}
+
+.login img{
+    width: 40%;
+}
