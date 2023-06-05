@@ -25,23 +25,24 @@ public class AttendanceController {
 	@Autowired
 	private AttendanceService service;
 	
-	/*
-	 * @GetMapping("/show") public List<AttendanceModel> getAll(){ return
-	 * service.showAll(); }
-	 */
-	
-	
 	@GetMapping("/{id}")
-	public Optional<AttendanceModel> getById(@PathVariable("id") Integer id){
+	public Optional<Attendance> getById(@PathVariable("id") Integer id){
 		return service.showAll(id);
 	}
 	
-	@PostMapping("/CREATE")
-	public void addAttendance (@RequestBody AttendanceModel AttendanceModel ) {
-		service.addAttendance(AttendanceModel);
-	}
+// 	@PostMapping("/CREATE")
+// 	public void addAttendance (@RequestBody Attendance AttendanceModel ) {
+// 		service.addAttendance(AttendanceModel);
+// 	}
+// 	@PutMapping("/SAVE/{id}")
+// 	public void updateAttendance(@PathVariable Integer id, @RequestBody Attendance AttendanceModel ) {
+// 		service.updateAttendance(id, AttendanceModel);
+// 	}
+	
 	@PutMapping("/SAVE/{id}")
-	public void updateAttendance(@PathVariable Integer id, @RequestBody AttendanceModel AttendanceModel ) {
+	public void updateAttendance(@PathVariable Integer id, @RequestBody Attendance AttendanceModel ) {
 		service.updateAttendance(id, AttendanceModel);
-	}
+
+}
+	
 }
