@@ -17,26 +17,6 @@ function Home() {
   }
 
   return (
-    // <div className='verticalNavbar'>
-    //   <div className='navItems'>
-    //     <NavLink activeclassname="active" to={"/DailyAttendance"}>Daily Attendance</NavLink>
-    //   </div>
-    //   <div className='navItems'>
-    //     <NavLink activeclassname="active" to={"/RTOUpdates"}>Monthly RTO updates</NavLink>
-    //   </div>
-    //   <div className='navItems'>
-    //     <NavLink activeclassname="active" to={"/admin"}>Admin</NavLink>
-    //   </div>
-    //   <div className='navItems'>
-    //     <NavLink activeclassname="active" to={"/report"}>Report</NavLink>
-    //   </div>
-    //   <div className='footer'>
-
-    //     <Button onClick={logout}>
-    //       Logout
-    //     </Button>
-    //   </div>
-    // </div>
     <div className='home'>
       <Row gutter={16}>
         <Col span={8}>

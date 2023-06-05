@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Button, Form, Input, Popconfirm, Table, Modal } from 'antd';
+import { Button, Form, Input, Breadcrumb, Table, Modal } from 'antd';
 import "../Admin/Admin.css"
 
 function Admin() {
@@ -66,7 +66,17 @@ function Admin() {
         },
     ];
     return (
-        <div style={{ width: "100%", padding: "2vh" }}>
+        <div style={{ width: "100%", padding: "5vh" }}>
+             <Breadcrumb
+                items={[
+                    {
+                        title: <a href="/">Home</a>,
+                    },
+                    {
+                        title: <a href="/Admin">Admin</a>,
+                    },
+                ]}
+            />
             <Button
                 onClick={handleAdd}
                 style={{

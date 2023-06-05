@@ -12,25 +12,17 @@ import axios from 'axios'
 import { Breadcrumb } from 'antd';
 
 function DailyAttendance() {
-    const [data, setData] = useState([]);
+    const [attendance, setAttendance] = useState([]);
     const id = sessionStorage.getItem("associateId")
-    let attendance = [];
     const onChange = (e) => {
-        console.log('radio checked', e.target.value);
-        attendance.push(e.target.value)
+        setAttendance(e.target.value)
     };
     const handleChange = (value) => {
         console.log(`selected ${value}`);
     };
-    useEffect(() => {
-        axios
-            .get("http://localhost:8080/attendance/" + id)
-            .then((value) => setData(value))
-            .catch(error => console.log(error));
-    }, [])
 
     const submit = () => {
-        axios.put(("http://localhost:8080/attendance/SAVE/" + id), { data })
+        axios.put(("http://localhost:8080/attendance/save/" + id), attendance)
             .then(data => console.log("saved"))
             .catch(error => console.log(error));
         console.log(attendance)

@@ -4,6 +4,7 @@ import {
   BrowserRouter as Router,
   Routes,
   Route,
+  redirect
 }
   from 'react-router-dom';
 import Home from './Components/Home/Home';
@@ -14,6 +15,10 @@ import Admin from './Components/Admin/Admin';
 import Report from './Components/Report/Report';
 
 function App() {
+  const logout = () => {
+    window.location.href = '/';
+    sessionStorage.clear()
+  }
   return (
     <div className="App">
       <div className='navBar'>
@@ -37,7 +42,7 @@ function App() {
         <span>Genc Attendance</span>
         {sessionStorage.getItem("isLoggedin") ? (
 
-        <button className='logoutbtn' style={{height: "50%",marginTop: "3vh", width: "10%"}}>Logout</button>
+        <button onClick={logout} className='logoutbtn' style={{height: "50%",marginTop: "3vh", width: "10%"}}>Logout</button>
         ):
         (
           <div>
