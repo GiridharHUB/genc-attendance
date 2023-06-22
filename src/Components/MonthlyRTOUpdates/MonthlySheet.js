@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import DatePicker from "react-multi-date-picker";
 import {
     Button,
@@ -8,10 +8,21 @@ import AttendanceForm from '../Form/AttendanceForm';
 import "../MonthlyRTOUpdates/MonthlySheet.css";
 import Toolbar from "react-multi-date-picker/plugins/toolbar"
 import { Breadcrumb } from 'antd';
+import axios from 'axios'
 
 function MonthlySheet() {
-    const [value, setValue] = useState(new Date());
-    console.log(value)
+    const [value, setValue] = useState([]);
+    const dates = []
+    const id = sessionStorage.getItem("associateId");
+    const submit = () => {
+        for (var i = 0; i < value.length; i++) {
+            dates.push(value[i].day + "/" + value[i].month.number + "/" + value[i].year)
+        }
+        axios.post(("http://localhost:8080/monthlyRtoDates"), { "monthlyRtoDates": dates, "assosiate_id": id })
+        .then(data => console.log("saved"))
+        .catch(error => console.log(error));
+    }
+
     return (
         <div style={{ width: "100%", padding: "2%" }}>
             <Breadcrumb
@@ -56,7 +67,7 @@ function MonthlySheet() {
                         ]} />
                 </div>
 
-                <Button style={{ background: "#000048", color: "#fff", width: "15%" }}>Submit</Button>
+                <Button onClick={submit} style={{ background: "#000048", color: "#fff", width: "15%" }}>Submit</Button>
                 <Button style={{ width: "15%", marginLeft: "2vh" }}>Reset</Button>
             </Form>
         </div>
