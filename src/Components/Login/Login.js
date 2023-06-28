@@ -35,18 +35,16 @@ function Login() {
 
   };
   return (
-    <div className='body login'>
-      <img src={Signup} alt="signup"></img>
-
-      <Card
-        title="Login"
-        style={{
-          width: 300,
-        }}
-      >
-        <Form form={form} name="horizontal_login" onFinish={onFinish}
-          className="userform"
-        >
+      <div className='body login'>
+      <div className='logincard'>
+        <img className='signupimg' src={Signup} alt="signup"></img>
+        <Divider type="vertical" style={{height: "auto"}}/>
+        <Form form={form} name="horizontal_login" onFinish={onFinish} className="userform">
+          <div style={{ marginBottom: "3vh" }}>
+            <img className='logo' src={logo} alt="cognizant logo"></img>
+            <h2>Hello Again!</h2>
+            <h3 className='muted'>Enter your Associate Id to login</h3>
+          </div>
           <Form.Item
             name="username"
             rules={[
@@ -55,6 +53,10 @@ function Login() {
                 message: 'Please input your Associate ID!',
               },
             ]}
+            style={{
+              width: "50%",
+              margin: "5px auto"
+            }}
           >
             <Input
               type='text'
@@ -70,13 +72,14 @@ function Login() {
                   !form.isFieldsTouched(true) ||
                   !!form.getFieldsError().filter(({ errors }) => errors.length).length
                 }
+                style={{ marginTop: "2vh" }}
               >
-                Submit
+                Login
               </Button>
             )}
           </Form.Item>
         </Form>
-      </Card>
+      </div>
     </div>
   )
 }
