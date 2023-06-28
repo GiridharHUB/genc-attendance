@@ -48,7 +48,16 @@
   box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
 }
 
-.details span{
+.details {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 0;
+}
+
+
+.details span {
   font-size: medium !important;
 }
 
@@ -61,21 +70,20 @@
 
 .body {
   width: 100%;
-  margin: 5vh auto;
-  padding: 10vh;
+  margin: 10vh auto;
 }
 
 /* .userform {
   width: 100%;
 } */
 
-.logoutbtn{
+.logoutbtn {
   box-shadow: 0 2px 0 rgba(0, 0, 0, 0.02);
 }
 
-.logoutbtn:hover{
+.logoutbtn:hover {
   cursor: pointer;
-  border:#61dafb 2px solid;
+  border: #61dafb 2px solid;
   border-radius: 5px;
   color: #000048;
 }
@@ -104,11 +112,11 @@
 
 }
 
-.authoriseduser{
+.authoriseduser {
   display: flex;
 }
 
-.formbody{
+.formbody {
   margin-top: 3vh;
   width: 100%;
 }
