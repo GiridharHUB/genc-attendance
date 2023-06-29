@@ -26,7 +26,7 @@ function App() {
         {sessionStorage.getItem("isLoggedin") ? (
 
           <div className='details'>
-            <span>Welcome {sessionStorage.getItem("associateName")}</span><br />
+            <span>Welcome {sessionStorage.getItem("associateName")}</span>
             <span>Id: {sessionStorage.getItem("associateId")}</span>
 
           </div>

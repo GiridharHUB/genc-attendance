@@ -10,3 +10,7 @@
     flex-direction: column;
     gap: 3vh;
 }
+
+.ant-form-item{
+    margin-bottom: 10px !important;
+}

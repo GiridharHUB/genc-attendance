@@ -1,9 +1,10 @@
 import React from 'react'
-import { Button } from 'antd';
 import "../Home/Home.css"
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
-import { Card, Col, Row } from 'antd';
+import { EditOutlined, EllipsisOutlined, SettingOutlined } from '@ant-design/icons';
+import { Avatar, Card, Row, Col } from 'antd';
+const { Meta } = Card;
 
 function Home() {
   const navigate = useNavigate();
@@ -41,6 +42,28 @@ function Home() {
           </Link>
         </Col>
       </Row>
+
+      <Card
+    style={{
+      width: 300,
+    }}
+    cover={
+      <img
+        alt="example"
+        src="https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png"
+      />
+    }
+    actions={[
+      <SettingOutlined key="setting" />,
+      <EditOutlined key="edit" />,
+      <EllipsisOutlined key="ellipsis" />,
+    ]}
+  >
+    <Meta
+      title="Daily Attendance"
+      description="Mark your Daily Attendace Here!"
+    />
+  </Card>
     </div>
   );
 }
