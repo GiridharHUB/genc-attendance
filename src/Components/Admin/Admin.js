@@ -4,6 +4,9 @@ import "../Admin/Admin.css"
 import axios from 'axios';
 
 function Admin() {
+    const [isUpdateModalOpen, setisUpdateModalOpen] = useState(false);
+    const [data, setData] = useState([])
+    const [newData, setNewData] = useState([])
     const [open, setOpen] = useState(false);
     const [confirmLoading, setConfirmLoading] = useState(false);
     const [modalText, setModalText] = useState('Content of the modal');
@@ -37,16 +40,49 @@ function Admin() {
         }));
     }
     const handleOk = () => {
+
         setModalText('The modal will be closed after two seconds');
+
         setConfirmLoading(true);
-        axios.put(("http://localhost:8080/attendance/addAssosiate"), { newAssociate })
+
+        axios.post(("http://localhost:8080/attendance/addAssosiate"), {
+
+            newAssociate,
+
+            "associate_id": newAssociate.associate_id,
+
+            "associate_name": newAssociate.associate_name,
+
+            "project_id": newAssociate.project_id,
+
+            "project_desc": newAssociate.project_desc,
+
+            "base_location": newAssociate.base_location,
+
+            "edl_name": newAssociate.edl_name,
+
+            "genc_2022": newAssociate.genc_2022,
+
+            "project_manager_name": newAssociate.project_manager_name,
+
+            "project_manager_id": newAssociate.project_manager_id,
+
+        })
+
             .then(data => console.log("saved"))
+
             .catch(error => console.log(error));
+
         setTimeout(() => {
+
             setOpen(false);
+
             setConfirmLoading(false);
+
             window.location.reload()
+
         }, 2000);
+
     };
     const handleCancel = () => {
         console.log('Clicked cancel button');
@@ -109,121 +145,354 @@ function Admin() {
             dataIndex: 'project_manager_name',
             key: 'project_manager_name',
         },
+
+{
+
+            title: 'Action',
+
+            key: 'action',
+
+            render: (_, record) => (
+
+                <Space size="middle">
+
+                    <Button
+
+                        onClick={() => handleUpdate(record)}
+
+
+
+
+                    >
+
+                        Update
+
+                    </Button>
+
+                </Space>
+
+            ),
+
+        },
     ];
     const handleDelOk = () => {
         axios.delete("http://localhost:8080/attendance/deleteAsssosiate/" + delAsso)
-        .then(console.log("deleted"))
-        .catch(error => console.log(error));
+            .then(console.log("deleted"))
+            .catch(error => console.log(error));
         setDelIsModalOpen(false);
+        window.location.reload();
     };
     const handleDelCancel = () => {
         setDelIsModalOpen(false);
     };
+    const handleUpdateCancel = () => {
+
+        setisUpdateModalOpen(false);
+
+
+
+
+    }
+    const handleUpdate = (value) => {
+
+        axios
+
+            .get("http://localhost:8080/attendance/" + value.associate_id)
+
+            .then(data => setData(data.data))
+
+            .catch(error => console.log(error));
+
+        setisUpdateModalOpen(true);
+
+
+
+
+
+    }
+
+
+
+
+    const handleUpdateChange = (e) => {
+
+        const { name, value } = e.target;
+
+        setNewData((prevState) => ({
+
+            ...prevState,
+
+            [name]: value
+
+        }));
+
+    }
+
+
+
+
+
+    const handleUpdateOk = () => {
+
+        setisUpdateModalOpen(false);
+
+        axios
+
+            .put(("http://localhost:8080/attendance/updateAssociate/" + data.associate_id),
+
+                {
+
+                    "project_id": newData.new_project_id,
+
+                    "project_desc": newData.new_project_desc,
+
+                    "project_manager_name": newData.new_project_manager_name,
+
+                    "project_manager_id": newData.new_project_manager_id
+
+                })
+
+            .then(data => console.log("updatedd"))
+
+            .catch(error => console.log(error));
+
+        window.location.reload()
+
+    }
     return (
         <div style={{ width: "100%", padding: "5vh" }}>
+
             <Breadcrumb
+
                 items={[
+
                     {
+
                         title: <a href="/">Home</a>,
+
                     },
+
                     {
+
                         title: <a href="/Admin">Admin</a>,
+
                     },
+
                 ]}
+
             />
 
 
+
+
+
             <Button danger
+
                 onClick={handleDel}
+
                 style={{
+
                     marginBottom: 16,
+
                     marginRight: 15,
+
                     float: "right",
+
                     width: "6%"
+
+
+
 
                 }}>Delete</Button>
 
-            <Button
-                onClick={handleAdd}
-                style={{
-                    marginBottom: 16,
-                    marginRight: 15,
-                    float: "right",
-                    width: "6%"
 
-                }}
-            >
-                Update
-            </Button>
+
+
+
             <Button
+
                 onClick={handleAdd}
+
                 style={{
+
                     marginBottom: 16,
+
                     marginRight: 15,
+
                     background: "#000048",
+
                     color: 'white',
+
                     float: "right",
+
                     width: "6%"
 
+
+
+
                 }}
+
             >
+
                 Add
+
             </Button>
+
+
+
 
             <Table style={{ paddingInline: "4vh" }} bordered dataSource={associates} columns={columns} />
+
             <Modal
+
                 title="Add Associates"
+
                 open={open}
+
                 onOk={handleOk}
+
                 confirmLoading={confirmLoading}
+
                 onCancel={handleCancel}
+
             >
+
                 <Form
+
                     layout={"vertical"}
+
                     form={form}
+
                     initialValues={{
+
                         layout: "vertical",
+
                     }}
+
                     onValuesChange={onFormLayoutChange}
+
                     style={{
+
                         maxWidth: formLayout === 'inline' ? 'none' : 600,
+
                     }}
+
                 >
+
                     <Form.Item label="Associate ID" >
-                        <Input placeholder="Enter associate id" name='associate_id' onChange={handleChange} />
+
+                        <Input type='number' placeholder="Enter associate id" name='associate_id' onChange={handleChange} />
+
                     </Form.Item>
+
                     <Form.Item label="Associate Name">
-                        <Input placeholder="Enter associate name" name='associate_name' onChange={handleChange} />
+
+                        <Input type='text' placeholder="Enter associate name" name='associate_name' onChange={handleChange} />
+
                     </Form.Item>
+
                     <Form.Item label="Project ID">
-                        <Input placeholder="Enter project id" name='project_id' onChange={handleChange} />
+
+                        <Input type='number' placeholder="Enter project id" name='project_id' onChange={handleChange} />
+
                     </Form.Item>
+
                     <Form.Item label="Project Description">
-                        <Input placeholder="Enter project description" name='project_desc' onChange={handleChange} />
+
+                        <Input type='text' placeholder="Enter project description" name='project_desc' onChange={handleChange} />
+
                     </Form.Item>
+
                     <Form.Item label="Base Location">
-                        <Input placeholder="Enter the base location" name='base_location' onChange={handleChange} />
+
+                        <Input type='text' placeholder="Enter the base location" name='base_location' onChange={handleChange} />
+
                     </Form.Item>
+
                     <Form.Item label="EDL Name">
-                        <Input placeholder="Enter EDL Name" name='edl_name' onChange={handleChange} />
+
+                        <Input type='text' placeholder="Enter EDL Name" name='edl_name' onChange={handleChange} />
+
                     </Form.Item>
+
                     <Form.Item label="Genc 2022">
-                        <Input placeholder="" name='genc_2022' onChange={handleChange} />
+
+                        <Input type='text' placeholder="" name='genc_2022' onChange={handleChange} />
+
                     </Form.Item>
+
                     <Form.Item label="Project Manager Name">
-                        <Input placeholder="Enter project manager name" name='project_manager_name' onChange={handleChange} />
+
+                        <Input type='text' placeholder="Enter project manager name" name='project_manager_name' onChange={handleChange} />
+
                     </Form.Item>
+
                     <Form.Item label="Project Manager ID">
-                        <Input placeholder="Enter project manager id" name='project_manager_id' onChange={handleChange} />
+
+                        <Input type='number' placeholder="Enter project manager id" name='project_manager_id' onChange={handleChange} />
+
                     </Form.Item>
+
                 </Form>
+
             </Modal>
 
+
+
+
             <Modal title="Remove Associate" open={isDelModalOpen} onOk={handleDelOk} onCancel={handleDelCancel}>
+
                 <Form.Item label="Associate ID" >
+
                     <Input placeholder="Enter associate id" name='associate_id' onChange={handleDelChange} />
+
                 </Form.Item>
+
             </Modal>
+
+
+
+
+            <Modal title="Update Associate" open={isUpdateModalOpen} onOk={handleUpdateOk} onCancel={handleUpdateCancel}>
+
+                <Form.Item label="Associate ID" >
+
+                    <Input value={data.associate_id} disabled />
+
+                </Form.Item>
+
+                <Form.Item label="Associate Name">
+
+                    <Input value={data.associate_name} disabled />
+
+                </Form.Item>
+
+                <Form.Item label="Project Id" >
+
+                    <Input placeholder="Enter Project ID" name='new_project_id' onChange={(e) => handleUpdateChange(e)} />
+
+                </Form.Item>
+
+                <Form.Item label="Project Desc" >
+
+                    <Input placeholder="Enter Project desc" name='new_project_desc' onChange={(e) => handleUpdateChange(e)} />
+
+                </Form.Item>
+
+                <Form.Item label="Project Manager Name" >
+
+                    <Input placeholder="Enter Manager name" name='new_project_manager_name' onChange={(e) => handleUpdateChange(e)} />
+
+                </Form.Item>
+
+                <Form.Item label="Project Manager Id" >
+
+                    <Input placeholder="Enter associate id" name='new_project_manager_id' onChange={(e) => handleUpdateChange(e)} />
+
+                </Form.Item>
+
+            </Modal>
+
         </div>
     )
 }
