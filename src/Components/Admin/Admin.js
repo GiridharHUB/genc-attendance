@@ -17,7 +17,6 @@ function Admin() {
     const [newData, setNewData] = useState([]);
     const [open, setOpen] = useState(false);
     const [confirmLoading, setConfirmLoading] = useState(false);
-    const [modalText, setModalText] = useState("Content of the modal");
     const [isDelModalOpen, setDelIsModalOpen] = useState(false);
     const [associates, setAssociates] = useState([]);
     const [delAsso, setAsso] = useState();
@@ -33,7 +32,7 @@ function Admin() {
             console.log(data.data);
             setAssociates(data.data);
         });
-    }, []);
+    });
 
     const handleDelChange = (e) => {
         setAsso(e.target.value);
@@ -47,7 +46,6 @@ function Admin() {
         }));
     };
     const handleOk = () => {
-        setModalText("The modal will be closed after two seconds");
         setConfirmLoading(true);
         axios
             .post("http://localhost:8080/attendance/addAssosiate", {

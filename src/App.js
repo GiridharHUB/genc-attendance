@@ -1,10 +1,8 @@
 import './App.css';
-// import { Button } from "antd"
 import {
   BrowserRouter as Router,
   Routes,
   Route,
-  redirect
 }
   from 'react-router-dom';
 import Home from './Components/Home/Home';

@@ -4,7 +4,7 @@ import {
     Form,
     Radio,
 } from 'antd';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import "../DailyAttendance/DailyAttendance.css"
 import { Select } from 'antd';
 import AttendanceForm from '../Form/AttendanceForm';

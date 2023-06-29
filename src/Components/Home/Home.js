@@ -1,9 +1,8 @@
 import React from 'react'
 import "../Home/Home.css"
-import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { PlusCircleOutlined, CalendarOutlined, UserOutlined } from '@ant-design/icons';
-import { Avatar, Card, Row, Col } from 'antd';
+import { Card } from 'antd';
 import admin from "../../admin.svg"
 import calendar from "../../calendar.svg"
 import attendance from "../../attendance.svg"

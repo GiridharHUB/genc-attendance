@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from "axios"
 import "../Login/Login.css"
 import Signup from "../../signup.svg"
-import { Card, Divider } from 'antd';
+import { Divider } from 'antd';
 import logo from "../../logo.png"
 
 function Login() {
