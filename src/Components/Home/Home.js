@@ -2,24 +2,32 @@ import React from 'react'
 import "../Home/Home.css"
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
-import { EditOutlined, EllipsisOutlined, SettingOutlined } from '@ant-design/icons';
+import { PlusCircleOutlined, CalendarOutlined, UserOutlined } from '@ant-design/icons';
 import { Avatar, Card, Row, Col } from 'antd';
+import admin from "../../admin.svg"
+import calendar from "../../calendar.svg"
+import attendance from "../../attendance.svg"
+
 const { Meta } = Card;
 
 function Home() {
   const navigate = useNavigate();
 
-  const logout = () => {
-    sessionStorage.clear()
-    navigate("/")
-    setTimeout(() => {
-      window.location.reload()
-    }, 100)
+  const dailyAttendance = () => {
+    navigate('/DailyAttendance')
+  }
+
+  const monthlyRto = () => {
+    navigate('/RTOUpdates')
+  }
+
+  const adminPanel = () => {
+    navigate('/admin')
   }
 
   return (
     <div className='home'>
-      <Row gutter={16}>
+      {/* <Row gutter={16}>
         <Col span={8}>
           <Link to={"/DailyAttendance"}>
             <Card title="Daily Attendance" className='card'>
@@ -41,27 +49,70 @@ function Home() {
             </Card>
           </Link>
         </Col>
-      </Row>
+      </Row> */}
 
       <Card
-    style={{
-      width: 300,
-    }}
+      className='cards-ant'
     cover={
       <img
-        alt="example"
-        src="https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png"
+        alt="admin"
+        src={attendance}
+        style={{margin: "4vh", width: "85%"}}
       />
     }
     actions={[
-      <SettingOutlined key="setting" />,
-      <EditOutlined key="edit" />,
-      <EllipsisOutlined key="ellipsis" />,
+      <PlusCircleOutlined />
     ]}
+    onClick={dailyAttendance}
   >
     <Meta
       title="Daily Attendance"
       description="Mark your Daily Attendace Here!"
+    />
+  </Card>
+
+  <Card
+        className='cards-ant'
+
+    cover={
+      <img
+        alt="admin"
+        src={calendar}
+        style={{margin: "4vh", width: "85%"}}
+      />
+    }
+    actions={[
+      <CalendarOutlined />
+    ]}
+    onClick={monthlyRto}
+
+  >
+    <Meta
+      title="Monthly RTO Updates"
+      description="Enter your monthly RTo updates"
+    />
+  </Card>
+
+
+  <Card
+        className='cards-ant'
+
+    cover={
+      <img
+        alt="admin"
+        src={admin}
+        style={{padding: "2vh"}}
+      />
+    }
+    actions={[
+      <UserOutlined />
+    ]}
+    onClick={adminPanel}
+
+  >
+    <Meta
+      title="Admin"
+      description="Admin Panel"
     />
   </Card>
     </div>

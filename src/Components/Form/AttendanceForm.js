@@ -34,16 +34,16 @@ function AttendanceForm() {
             marginTop: '3vh'
         }}
     >
-        <div className='inputs'>
+        <div className='inputsAttendance'>
             <Form.Item label="Project Id">
                 <Input value={data.project_Id} disabled/>
-            </Form.Item>
+            </Form.Item><br />
             <Form.Item label="Project Name">
                 <Input value={data.project_Desc} disabled/>
-            </Form.Item>
+            </Form.Item><br />
             <Form.Item label="Project Location">
                 <Input value={data.base_location} disabled/>
-            </Form.Item>
+            </Form.Item><br />
         </div>
 
           </Form>

@@ -6,6 +6,10 @@
     color: #000048 !important;
 }
 
+.ant-card{
+    width: 25% !important;
+}
+
 .verticalNavbar{
     height: 90vh;
     display: flex;
@@ -56,9 +60,17 @@
 .home{
     width: 100%;
     padding: 10vh;
+    display: flex;
+    justify-content: space-around;
 }
 
 .card:hover{
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     cursor: pointer;
+}
+
+.cards-ant:hover{
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    cursor: pointer;
+
 }

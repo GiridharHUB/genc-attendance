@@ -4,39 +4,48 @@ import "../Admin/Admin.css"
 import axios from 'axios';
 
 function Admin() {
-    const [count, setCount] = useState(2);
     const [open, setOpen] = useState(false);
     const [confirmLoading, setConfirmLoading] = useState(false);
     const [modalText, setModalText] = useState('Content of the modal');
+    const [isDelModalOpen, setDelIsModalOpen] = useState(false);
     const [associates, setAssociates] = useState([])
+    const [delAsso, setAsso] = useState()
     const [form] = Form.useForm();
     const [formLayout, setFormLayout] = useState('horizontal');
     const onFormLayoutChange = ({ layout }) => {
         setFormLayout(layout);
     };
-    useEffect(()=>{
+    const [newAssociate, setNewAssociate] = useState([])
+    useEffect(() => {
         axios.get("http://localhost:8080/attendance/showAll")
-        .then((data)=>{
-            console.log(associates)
-            console.log(data.data)
-            setAssociates(data.data)
-        })
-    },[])
-    const confirm = (e) => {
-        console.log(e);
-        message.success('Click on Yes');
-    };
-    const cancel = (e) => {
-        console.log(e);
-        message.error('Click on No');
-    };
+            .then((data) => {
+                console.log(associates)
+                console.log(data.data)
+                setAssociates(data.data)
+            })
+    }, [])
 
+    const handleDelChange = (e) => {
+        setAsso(e.target.value)
+    }
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setNewAssociate((prevState) => ({
+            ...prevState,
+            [name]: value,
+        }));
+    }
     const handleOk = () => {
         setModalText('The modal will be closed after two seconds');
         setConfirmLoading(true);
+        axios.put(("http://localhost:8080/attendance/addAssosiate"), { newAssociate })
+            .then(data => console.log("saved"))
+            .catch(error => console.log(error));
         setTimeout(() => {
             setOpen(false);
             setConfirmLoading(false);
+            window.location.reload()
         }, 2000);
     };
     const handleCancel = () => {
@@ -48,6 +57,11 @@ function Admin() {
         setOpen(true)
 
     };
+
+    const handleDel = () => {
+        setDelIsModalOpen(true);
+    }
+
 
     const columns = [
         {
@@ -95,37 +109,16 @@ function Admin() {
             dataIndex: 'project_manager_name',
             key: 'project_manager_name',
         },
-        {
-            title: 'Action',
-            key: 'action',
-            render: () => (
-                <Space size="middle">
-                    <Popconfirm
-                        title="Delete the task"
-                        description="Are you sure to delete this task?"
-                        onConfirm={confirm}
-                        onCancel={cancel}
-                        okText="Yes"
-                        cancelText="No"
-                    >
-                        <Button danger>Delete</Button>
-                    </Popconfirm>
-
-
-                    <Button
-                        onClick={handleAdd}
-                        style={{
-                            background: "#000048",
-                            color: 'white'
-                        }}
-                    >
-                        Update
-                    </Button>
-
-                </Space>
-            ),
-        },
     ];
+    const handleDelOk = () => {
+        axios.delete("http://localhost:8080/attendance/deleteAsssosiate/" + delAsso)
+        .then(console.log("deleted"))
+        .catch(error => console.log(error));
+        setDelIsModalOpen(false);
+    };
+    const handleDelCancel = () => {
+        setDelIsModalOpen(false);
+    };
     return (
         <div style={{ width: "100%", padding: "5vh" }}>
             <Breadcrumb
@@ -138,6 +131,30 @@ function Admin() {
                     },
                 ]}
             />
+
+
+            <Button danger
+                onClick={handleDel}
+                style={{
+                    marginBottom: 16,
+                    marginRight: 15,
+                    float: "right",
+                    width: "6%"
+
+                }}>Delete</Button>
+
+            <Button
+                onClick={handleAdd}
+                style={{
+                    marginBottom: 16,
+                    marginRight: 15,
+                    float: "right",
+                    width: "6%"
+
+                }}
+            >
+                Update
+            </Button>
             <Button
                 onClick={handleAdd}
                 style={{
@@ -172,34 +189,40 @@ function Admin() {
                         maxWidth: formLayout === 'inline' ? 'none' : 600,
                     }}
                 >
-                    <Form.Item label="Associate ID">
-                        <Input placeholder="Enter associate id" />
+                    <Form.Item label="Associate ID" >
+                        <Input placeholder="Enter associate id" name='associate_id' onChange={handleChange} />
                     </Form.Item>
                     <Form.Item label="Associate Name">
-                        <Input placeholder="Enter associate name" />
+                        <Input placeholder="Enter associate name" name='associate_name' onChange={handleChange} />
                     </Form.Item>
                     <Form.Item label="Project ID">
-                        <Input placeholder="Enter project id" />
+                        <Input placeholder="Enter project id" name='project_id' onChange={handleChange} />
                     </Form.Item>
                     <Form.Item label="Project Description">
-                        <Input placeholder="Enter project description" />
+                        <Input placeholder="Enter project description" name='project_desc' onChange={handleChange} />
                     </Form.Item>
                     <Form.Item label="Base Location">
-                        <Input placeholder="Enter the base location" />
+                        <Input placeholder="Enter the base location" name='base_location' onChange={handleChange} />
                     </Form.Item>
                     <Form.Item label="EDL Name">
-                        <Input placeholder="Enter EDL Name" />
+                        <Input placeholder="Enter EDL Name" name='edl_name' onChange={handleChange} />
                     </Form.Item>
                     <Form.Item label="Genc 2022">
-                        <Input placeholder="" />
+                        <Input placeholder="" name='genc_2022' onChange={handleChange} />
                     </Form.Item>
                     <Form.Item label="Project Manager Name">
-                        <Input placeholder="Enter project manager name" />
+                        <Input placeholder="Enter project manager name" name='project_manager_name' onChange={handleChange} />
                     </Form.Item>
                     <Form.Item label="Project Manager ID">
-                        <Input placeholder="Enter project manager id" />
+                        <Input placeholder="Enter project manager id" name='project_manager_id' onChange={handleChange} />
                     </Form.Item>
                 </Form>
+            </Modal>
+
+            <Modal title="Remove Associate" open={isDelModalOpen} onOk={handleDelOk} onCancel={handleDelCancel}>
+                <Form.Item label="Associate ID" >
+                    <Input placeholder="Enter associate id" name='associate_id' onChange={handleDelChange} />
+                </Form.Item>
             </Modal>
         </div>
     )

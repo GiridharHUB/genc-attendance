@@ -49,6 +49,9 @@ function MonthlySheet() {
                 size={"default"}
                 style={{
                     width: "100%",
+                    marginTop: '3vh',
+                    boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px",
+                    padding: "3vh"
                 }}
             >
                 <AttendanceForm />
