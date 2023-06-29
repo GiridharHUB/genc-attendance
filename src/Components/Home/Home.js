@@ -27,30 +27,6 @@ function Home() {
 
   return (
     <div className='home'>
-      {/* <Row gutter={16}>
-        <Col span={8}>
-          <Link to={"/DailyAttendance"}>
-            <Card title="Daily Attendance" className='card'>
-              Mark your Daily Attendace Here!
-            </Card>
-          </Link>
-        </Col>
-        <Col span={8}>
-          <Link to={"/RTOUpdates"}>
-            <Card title="Monthly RTO" className='card'>
-              Enter Monthly RTO Plan Dates
-            </Card>
-          </Link>
-        </Col>
-        <Col span={8}>
-          <Link to={"/admin"}>
-            <Card title="Admin" className='card'>
-              Admin Panel
-            </Card>
-          </Link>
-        </Col>
-      </Row> */}
-
       <Card
       className='cards-ant'
     cover={
